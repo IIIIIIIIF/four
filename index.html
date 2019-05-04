@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+ 
+</head>
+<body>
+	<!--顶部logo和搜索框-->
+	<div id="header" v-if="headerState">
+	<div style="display: flex;">
+		<div id="indexSearch">
+		   <input type="search" value="" placeholder="请输入关键字" />
+		</div>		
+	</div>
+	</div>
+	<!--顶部logo和搜索框 end-->
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 底部导航 -->
+	<nav class="mui-bar mui-bar-tab tabber">
+		<a class="mui-tab-item mui-active" href="pages/main.html">
+			<span class="mui-icon mui-icon-home"></span>
+			<span class="mui-tab-label">首页</span>
+		</a>
+		<a class="mui-tab-item" href="pages/game.html">
+			<span class="mui-icon mui-icon-phone"></span>
+			<span class="mui-tab-label">游戏</span>
+		</a>
+		<a class="mui-tab-item" href="pages/app.html">
+			<span class="mui-icon mui-icon-email"></span>
+			<span class="mui-tab-label">应用</span>
+		</a>
+		<a class="mui-tab-item" href="pages/rank.html">
+			<span class="mui-icon mui-icon-gear"></span>
+			<span class="mui-tab-label">排行</span>
+		</a>
+		<a class="mui-tab-item" href="pages/mine.html">
+			<span class="mui-icon mui-icon-person"></span>
+			<span class="mui-tab-label">我的</span>
+		</a>
+	</nav>
+	<!-- 底部导航 end-->
+	
+	
+	
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			let headerApp=new Vue({
+				el:"#header",
+				data:{
+					headerState:true
+				}
+			})
+			
+			
+			mui.init({});
+			//创建子页面
+			var subpages=["pages/main.html","pages/game.html","pages/app.html","pages/rank.html","pages/mine.html"];
+			//创建子页面样式
+			var subpageStyle={
+				top:"108px",
+				bottom:"50px"				
+			}
+			
+			mui.plusReady(function(){
+				 //判断是否支持沉浸式
+				var isImmersedStatusbar = plus.navigator.isImmersedStatusbar();
+				if(isImmersedStatusbar){
+					//获取系统状态栏高度
+					var StatusbarHeigth  = plus.navigator.getStatusbarHeight();
+				//	console.log(StatusbarHeigth)
+					var header = document.getElementById('header');
+					header.style.paddingTop = StatusbarHeigth+'px';
+				}
+				 	
+				//加载首页
+
+				var self=plus.webview.currentWebview();
+				subpages.forEach(item=>{
+					if(item=="pages/mine.html"){
+						subpageStyle={
+							top:0,
+							bottom:"50px"				
+						}
+						let minesub=plus.webview.create(item,item,subpageStyle)
+						minesub.hide();
+						self.append(minesub)
+					}else{
+						subpageStyle={
+							top:"108px",
+							bottom:"50px"				
+						}
+						let sub=plus.webview.create(item,item,subpageStyle)
+						sub.hide();
+						self.append(sub)
+					}
+					
+					
+					
+				})		
+				plus.webview.show(subpages[0])
+				//加载首页end		 
+			});			
+			
+		
+		//底部导航点击
+		mui(".mui-bar-tab").on("tap","a",function(e){		
+			let tagPage=this.getAttribute("href");
+			if(tagPage=="pages/mine.html"){
+				headerApp.headerState=false			
+			}else{
+				headerApp.headerState=true;
+				plus.webview.hide(subpages[4]);
+			}
+			plus.webview.show(tagPage,"fade-in",100)
+		})
+		
+		
+		
+		</script>
+</body>
+</html>
