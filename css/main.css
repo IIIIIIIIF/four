@@ -1,4 +1,4 @@
-	html{touch-action: none}
+	html{touch-action: none;font-size: 0.75rem;}
 	*{margin: 0;padding: 0;list-style: none;}
 	#header{background:#1296DB; height:104px;}
    	#logo{width:50px; height:44px; text-align:center; flex-shrink:0;}
@@ -9,3 +9,4 @@
 		#indexCate a{color:#FFFFFF;}
 		.mui-active{border-color:#FFFFFF !important;}
 		.tabber{position: fixed;left: 0;bottom: 0;}
+	.scrollItem{height: 5.625rem;}
