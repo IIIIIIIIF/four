@@ -11,57 +11,127 @@
 
 	<body>
 		
-		<div class="mui-content">		
-			<div class="topBox">
-				<p>游戏精品</p>
-				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<div class="mui-scroll">
-						<div class="scrollItem mui-control-item" style="display: flex;">
-							<img class="gamescrollImg" src="../imgs/test.png" >
-							<span>爱玩斗地主</span>
-							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">下载</button>
+		<div class="mui-content" id="mainApp">
+			<div class="mui-scroll-wrapper" style="top:108">
+			<div class="mui-scroll">
+		
+
+				<!-- 游戏精品+游戏推荐 -->
+				<template v-for="(item,index) in gameMsg">
+				<div class="gameBox">
+					<p class="pBox">{{item.title}}</p>
+					<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="wrapperBox">
+						<div class="mui-scroll" id="wb-child">
+							
+							<template v-for="(gameitem,index) in item.gamelist">
+							
+								<div class="scrollItem mui-control-item" style="display: flex;padding-left: 0;height: 77%;">
+									<img class="gamescrollImg" :src="gameitem.img" >
+									<span>{{gameitem.name}}</span>
+									<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">下载</button>
+								</div>
+							
+							</template>
 						</div>
-						<div class="scrollItem mui-control-item">
-							<img src="../imgs/test.png" >
-							<p>爱玩斗地主</p>
-							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">下载</button>
+					</div>		
+				</div>
+				</template>
+				<!-- 游戏精品+游戏推荐 end-->
+				
+				<!-- 应用精品+应用推荐 -->
+				<template v-for="(item,index) in appMsg">
+				<div class="appBox">
+					<p class="pBox">{{item.title}}</p>
+					<template v-for="(appitem,index) in item.applist">
+						<div class="appItem">
+							<img :src="appitem.img" >
+							<div class="appItemMsg">
+								<span>{{appitem.name}}</span>
+								<p style="margin: 0;">{{appitem.classify}}|{{appitem.size}}</p>
+							</div>
+							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">下载</button>		
 						</div>
-						<div class="scrollItem mui-control-item">
-							<img src="../imgs/test.png" >
-							<p>爱玩斗地主</p>
-							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">下载</button>
-						</div>
-						<div class="scrollItem mui-control-item">
-							<img src="../imgs/test.png" >
-							<p>爱玩斗地主</p>
-							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">下载</button>
-						</div>
-						<div class="scrollItem mui-control-item">
-							<img src="../imgs/test.png" >
-							<p>爱玩斗地主</p>
-							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">下载</button>
-						</div>
-						<div class="scrollItem mui-control-item">
-							<img src="../imgs/test.png" >
-							<p>爱玩斗地主</p>
-							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">下载</button>
-						</div>
-						<div class="scrollItem mui-control-item">
-							<img src="../imgs/test.png" >
-							<p>爱玩斗地主</p>
-							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">下载</button>
-						</div>
-					</div>
-				</div>		
-			</div>
+					</template>
+				</div>
+				</template>
+				<!-- 应用精品+应用推荐 end-->
 			
+			
+			
+			
+				</div>
+			</div>
 			
 		</div>
 		
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			
+			var mainApp=new Vue({
+				el:"#mainApp",
+				data(){
+					return {
+						gameMsg:[
+							{
+								title:"游戏精品",
+								gamelist:[
+									{img:"../imgs/test.png",name:"爱玩斗地主"},
+									{img:"../imgs/test.png",name:"爱玩斗地主"},
+									{img:"../imgs/test.png",name:"爱玩斗地主"},
+									{img:"../imgs/test.png",name:"爱玩斗地主"},
+									{img:"../imgs/test.png",name:"爱玩斗地主"},
+									{img:"../imgs/test.png",name:"爱玩斗地主"},
+									{img:"../imgs/test.png",name:"爱玩斗地主"}
+								]
+							},
+							{
+								title:"游戏推荐",
+								gamelist:[
+									{img:"../imgs/test.png",name:"爱玩斗地主"},
+									{img:"../imgs/test.png",name:"爱玩斗地主"},
+									{img:"../imgs/test.png",name:"爱玩斗地主"},
+									{img:"../imgs/test.png",name:"爱玩斗地主"},
+									{img:"../imgs/test.png",name:"爱玩斗地主"},
+									{img:"../imgs/test.png",name:"爱玩斗地主"},
+									{img:"../imgs/test.png",name:"爱玩斗地主"}
+								]
+							}
+						],
+						appMsg:[
+							{
+								title:"应用精品",
+								applist:[
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6M"},
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6M"},
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6M"},
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6M"},
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6M"},
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6M"},
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6M"},
+									
+								]
+							},
+							{
+								title:"应用推荐",
+								applist:[
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6MM"},
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6M"},
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6MM"},
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6M"},
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6M"},
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6M"},
+									{img:"../imgs/test.png",name:"Airbnb爱彼迎",classify:"旅游出行",size:"66.6M"},
+								]
+							}
+						],
+						
+					}
+				}
+			})
+			mui('.mui-scroll-wrapper').scroll({
+				indicators: false, //是否显示滚动条
+				deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			});
 		</script>
 	</body>
 

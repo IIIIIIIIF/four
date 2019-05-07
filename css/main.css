@@ -9,6 +9,34 @@
 		#indexCate a{color:#FFFFFF;}
 		.mui-active{border-color:#FFFFFF !important;}
 		.tabber{position: fixed;left: 0;bottom: 0;}
+		
+	/* 首页横向滑动 */	
+	.gameBox{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: flex-start;
+		padding-left: 15px;
+		box-sizing: border-box;
+		background: #FFF;
+		margin: 10px 0;
+		height: 200px;
+	}
+	#wrapperBox{
+		height: 160px;	
+	}
+	#wb-child{
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		height: 100%;
+	}
+	.pBox{
+		font-weight: 700;
+		color: #000000;
+		margin: 20px 0 0 0;
+	}
 	.scrollItem{
 		width: 30%;
 		flex-direction: column;
@@ -18,5 +46,43 @@
 	}
 	.gamescrollImg{
 		width: 90%;
-		height: 30%;
+		height: 50%;
 	}
+	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+		color: inherit; 
+		border-bottom:none;
+		background: none;
+	}
+	/* 首页横向滑动 end*/	
+	/* 首页纵向滑动 */
+	.appBox{
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: flex-start;
+		padding-left: 15px;
+		box-sizing: border-box;
+		background: #FFF;
+		margin: 10px 0;	
+	
+	}
+	.appItem{
+		width: 97%;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+		border-bottom: 1px solid #CCC;
+		margin-top: 10px;
+		padding: 10px 0;
+	}
+	.appItemMsg{
+		width: 60%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-around;
+	}
+	/* 首页纵向滑动 end*
