@@ -9,4 +9,14 @@
 		#indexCate a{color:#FFFFFF;}
 		.mui-active{border-color:#FFFFFF !important;}
 		.tabber{position: fixed;left: 0;bottom: 0;}
-	.scrollItem{height: 5.625rem;}
+	.scrollItem{
+		width: 30%;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+		height: 90px;	
+	}
+	.gamescrollImg{
+		width: 90%;
+		height: 30%;
+	}
