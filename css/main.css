@@ -1,4 +1,7 @@
-	html{touch-action: none;font-size: 0.75rem;}
+	html{touch-action: none;font-size: 12px;}
+	[v-cloak] {
+		display: none;
+	}
 	*{margin: 0;padding: 0;list-style: none;}
 	#header{background:#1296DB; height:104px;}
    	#logo{width:50px; height:44px; text-align:center; flex-shrink:0;}
@@ -85,4 +88,31 @@
 		align-items: flex-start;
 		justify-content: space-around;
 	}
-	/* 首页纵向滑动 end*
+	/* 首页纵向滑动 end*/
+	
+	/* 游戏页 和 应用页*/
+	#leftBox{
+		width: 20%;
+		top:108
+	}
+	#ulBox{
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		background: #FFFFFF;
+		border-right: #E4E4E4 1px solid;
+	}
+	#ulBox li{
+		height: 65px;
+		line-height: 65px;
+		text-align: center;
+		border-bottom: #E4E4E4 1px solid;
+	}
+	#rightBox{
+		margin-left: 15%;
+		width: 73%;
+	
+	}
+	/* 游戏页 和 应用页 end*/

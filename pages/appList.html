@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+	</head>
+	<body>
+		<div class="mui-content" id="rightBox" v-cloak>
+			<div class="mui-scroll-wrapper" style="background: #FFFFFF;">
+				<div class="mui-scroll">
+					<template v-for="(item,index) in appslist">
+						<div class="appItem" :id="index" style="margin-left: 0.833333rem; width:73%;">
+							<img :src="item.img" >
+							<div class="appItemMsg">
+								<span>{{item.name}}</span>
+								<p style="margin: 0;">{{item.downNum}}|{{item.size}}</p>
+								<p style="margin: 0;color: lawngreen;">{{item.abs|absFilter}}</p>
+							</div>
+							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">下载</button>		
+						</div>
+					</template>
+				</div>
+			</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var arr=[[
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"酷我听书，最省流量酷我听书，最省流量"},
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"酷我听书，最省流量酷我听书，最省流量"},
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"送:VIP2经验卡，100万铜币送:VIP2经验卡，100万铜币"},
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"送:VIP2经验卡，100万铜币送:VIP2经验卡，100万铜币"},
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"送:VIP2经验卡，100万铜币送:VIP2经验卡，100万铜币"},
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"送:VIP2经验卡，100万铜币送:VIP2经验卡，100万铜币"},
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"送:VIP2经验卡，100万铜币送:VIP2经验卡，100万铜币"},
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"送:VIP2经验卡，100万铜币送:VIP2经验卡，100万铜币"},
+						
+						],
+						[
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"2万下载",size:"66.6M",abs:"送:VIP2经验卡，100万铜币送:VIP2经验卡，100万铜币"},
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"送:VIP2经验卡，100万铜币送:VIP2经验卡，100万铜币"},
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"送:VIP2经验卡，100万铜币送:VIP2经验卡，100万铜币"},
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"送:VIP2经验卡，100万铜币送:VIP2经验卡，100万铜币"},
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"送:VIP2经验卡，100万铜币送:VIP2经验卡，100万铜币"},
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"送:VIP2经验卡，100万铜币送:VIP2经验卡，100万铜币"},
+							{img:"../imgs/test.png",name:"Airbnb爱彼迎",downNum:"1.9万下载",size:"66.6M",abs:"送:VIP2经验卡，100万铜币送:VIP2经验卡，100万铜币"},
+						]
+						
+						]
+			var rightBox=new Vue({
+				el:"#rightBox",
+				data() {
+					return {
+						key: "sdas",
+						appslist:arr[0]
+					}
+				},
+				filters: {
+					absFilter: function(value) {
+						return value.length>8?value.substr(0,8)+"...":value;
+					}
+				}
+			})
+			
+			
+			mui.init({
+				 pullRefresh : {
+				    container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+				    down : {
+				      style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+				      color:'#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+				      height:'50px',//可选,默认50px.下拉刷新控件的高度,
+				      range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+				      offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+				      auto: false,//可选,默认false.首次加载自动上拉刷新一次
+				      callback :firstgetlist //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+				    },
+				    up : {
+					      height:50,//可选.默认50.触发上拉加载拖动距离
+					      auto:false,//可选,默认false.自动上拉加载一次
+					      contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+					      contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+					      callback :upgetlist //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				  }
+			});
+			mui.plusReady(function(){
+				firstgetlist()
+			});
+			mui('.mui-scroll-wrapper').scroll({
+				indicators: false, //是否显示滚动条
+				deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			});
+			//请求列表数据
+			//第一次请求用于上拉刷新和首次加载
+			var page=1;var cate=0;
+			function firstgetlist(){
+				
+				rightBox.key=cate;
+				cate!=0?rightBox.appslist=arr[1]:rightBox.appslist=arr[0]
+				/* page=1;
+				//加载数据动画
+				 plus.nativeUI.showWaiting();
+				//加载数据动画
+				mui.getJSON(
+					apiUrl+"article&m=articleList&page="+page+"&cate="+cate,
+					function(res){
+						if(res.status=="ok"){
+							newlist.news=res.data	
+							//请求成功停止动画
+							plus.nativeUI.closeWaiting();
+							//下拉刷新停止
+							mui('#refreshContainer').pullRefresh().endPulldown();
+							mui('#refreshContainer').pullRefresh().refresh(true);
+						}
+						//console.log(JSON.stringify(res))
+					}
+				) */
+			}
+			//用于上拉加载
+			function upgetlist(){
+			/* 	var that=this
+				page++;
+				mui.getJSON(
+					apiUrl+"article&m=articleList&page="+page+"&cate="+cate,
+					function(res){
+						if(res.status=="ok"){
+							newlist.news=newlist.news.concat(res.data)
+							//停止
+							that.endPullupToRefresh();
+						}else{
+							that.endPullupToRefresh(true);
+							return false;
+						}
+					}
+				) */
+			}
+		</script>
+	</body>
+</html>
