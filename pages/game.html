@@ -55,13 +55,13 @@
 					height:"100%",//子页面高度，默认为100%
 				}			
 				mui.plusReady(function(){					
-					//加载侧面
+					//加载右侧子页面
 					var self=plus.webview.currentWebview();				
 					let sub=plus.webview.create(subpages[0],subpages[0],subpageStyle)
 				//	sub.hide();
 					self.append(sub)
 					plus.webview.show(subpages[0])
-					//加载侧面end		 
+					//加载右侧子页面end		 
 				});			
 				mui('.mui-scroll-wrapper').scroll({
 					indicators: false, //是否显示滚动条

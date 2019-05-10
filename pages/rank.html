@@ -6,21 +6,64 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+		<style type="text/css">
+			.fontcolor{
+				color: #1296DB;
+			}
+		</style>
 	</head>
 
 	<body>
-		<div class="mui-content">
-			排行
-		</div>
-		
-		
-		
-		
-		
-		
-		 <script src="../js/mui.min.js"></script>
+			<div class="mui-content">
+				<ul class="rankUlBox" id="rankul" v-cloak>
+					<li :style="idx==1?'border-right:none':''" class="rank-ulbox-li" :class="idx==index?'fontcolor':''" :id="idx" v-for="(item,idx) in rankMsg">
+						{{item}}
+					</li>
+				</ul>
+			</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			var rankulApp=new Vue({
+				el:"#rankul",
+				data() {
+					return {
+						rankMsg:["游戏周排行","应用周排行"],
+						fontcolor: true,
+						index:0
+					}
+				}
+			})
 			
+			mui.init({});
+			var ranksubPage=["rankList.html"];
+			var ranksubPageStyle={
+				top:"47px",
+				bottom:"50px",
+				width:"100%",//子页面宽度，默认为100%
+				height:"100%",//子页面高度，默认为100%
+			}
+			mui.plusReady(function () {
+					//加载子页面
+			    	var self=plus.webview.currentWebview();				
+			    	let sub=plus.webview.create(ranksubPage[0],ranksubPage[0],ranksubPageStyle)	
+			    	self.append(sub)
+			    	plus.webview.show(ranksubPage[0])
+			    	//加载子页面end	
+			})
+			//导航点击
+			mui(".rankUlBox").on("tap","li",function(e){		
+				let tagPageid=this.getAttribute("id");	
+				rankulApp.index=tagPageid
+				console.log(tagPageid)
+				//获取子页面
+				var subpage=plus.webview.getWebviewById("rankList.html");
+				plus.webview.show("rankList.html","fade-in",100);
+				//给子页面传值
+				subpage.evalJS('cate='+tagPageid+';firstgetlist();')
+			})
 		</script>
 	</body>
 

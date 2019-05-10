@@ -12,24 +12,58 @@
 	<body>
 		
 		<!--顶部logo和搜索框-->
-		<div id="header">
-			<div style="display: flex;">
-					我的
+		<div id="header" style="height: 12.5rem;">
+			<div style="display: flex;" class="mineHeader">			
+					<img src="../imgs/test.png" class="mineImg">
+					<div class="username">
+						<input type="text" id="minename" value="admin" />
+						<img src="../imgs/edit.png" class="editImg">
+					</div>				
 			</div>
 		</div>
 		<!--顶部logo和搜索框 end-->
 		
 		<div class="mui-content">
-			我的
+			
+			<div class="mineList" id="mineApp">
+				
+				<template v-for="(item ,index ) in list">
+					<div class="listItem">
+						<img :src="item.img" >
+						<span style="margin-left: 1.666666rem;">{{item.msg}}</span>
+					</div>
+				</template>
+				
+			</div>	
 		</div>
 		
+		
 		<script src="../js/mui.min.js"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			var mineApp=new Vue({
+				el:"#mineApp",
+				data() {
+					return {
+						list: [
+							{
+								img:"../imgs/edit.png",
+								msg:"下载管理"
+							},
+							{
+								img:"../imgs/edit.png",
+								msg:"下载历史"
+							},
+							{
+								img:"../imgs/edit.png",
+								msg:"我的评论"
+							},
+						]
+					}
+				},
+			})
 			mui.init()
-			mui.plusReady(function(){
-				 
-			}		
-			)
+			mui.plusReady(function(){})
 		</script>
 	</body>
 
