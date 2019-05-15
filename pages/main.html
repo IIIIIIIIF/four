@@ -25,10 +25,10 @@
 							
 							<template v-for="(gameitem,index) in item.gamelist">
 							
-								<div class="scrollItem mui-control-item" style="display: flex;padding-left: 0;height: 77%;">
+								<div class="scrollItem mui-control-item downbox" style="display: flex;padding-left: 0;height: 77%;">
 									<img class="gamescrollImg" :src="gameitem.img" >
 									<span>{{gameitem.name}}</span>
-									<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">下载</button>
+									<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" >下载</button>
 								</div>
 							
 							</template>
@@ -67,6 +67,32 @@
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			mui.init({});
+			// 扩展API加载完毕，现在可以正常调用扩展API 
+			mui.plusReady(function(){
+				// 创建下载任务
+				
+				mui('.downbox').on("tap","button",function (e) {
+				  	// 创建下载任务
+				  	var dtask = plus.downloader.createDownload( "https://big.vqs.com/zqw/20190514/579F5E22017595E2736CEEE492FB6CFD.apk", {method:"GET"}, function ( d, status ) {
+				  		console.log("正在下载")
+						// 下载完成
+				  		if ( status == 200 ) { 
+				  			alert( "Download success: " + d.filename );
+				  			plus.io.resolveLocalFileSystemURL(d.filename,function(entry){
+				  				console.log(entry) 
+				  	           });					
+				  		} else {
+				  			 alert( "Download failed: " + status ); 
+				  		}  
+				  	});
+				  	//dtask.addEventListener( "statechanged", onStateChanged, false );
+				  	dtask.start(); 
+				});
+				
+			})
+			
+			
 			var mainApp=new Vue({
 				el:"#mainApp",
 				data(){

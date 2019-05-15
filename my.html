@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">下载管理</h1>
+</header>
+<div class="mui-content mui-content-padded">
+    <button type="button" id="btnDownload" class="mui-btn mui-btn-blue mui-btn-block">下载</button>
+    <ul id="downloadlist"></ul>
+    <div id="app">
+    </div>
+   <img src="" id="imgapp"/>
+</div>
+<script src='http://libs.baidu.com/jquery/1.8.3/jquery.min.js'></script>
+<script src="js/mui.min.js"></script>
+<script type="text/javascript">
+	var path;
+mui.plusReady(function(){
+  
+    $("#btnDownload").bind('tap',function(){
+       // 扩展API加载完毕后调用onPlusReady回调函数 
+			// 创建下载任务
+				var dtask = plus.downloader.createDownload( "http://editerupload.eepw.com.cn/201809/61001537857032.jpg", {method:"GET"}, function ( d, status ) {
+					// 下载完成
+					if ( status == 200 ) { 
+						alert( "Download success: " + d.filename );
+						plus.io.resolveLocalFileSystemURL(d.filename,function(entry){
+							console.log(entry.fullPath)
+								$("#app").append("<p>"+d.filename+"</p>");
+               					path=entry.fullPath
+				              
+				           });					
+					} else {
+						 alert( "Download failed: " + status ); 
+					}  
+				});
+				//dtask.addEventListener( "statechanged", onStateChanged, false );
+				dtask.start(); 
+    });
+});
+ $("#app").bind('tap',function(){  
+ 	  $("#imgapp").attr('src',path);
+ });
+
+
+
+
+{
+	 // 第一步：创建下载任务        
+    /*    var url = "http://editerupload.eepw.com.cn/201809/61001537857032.jpg";
+        var options = {method:"GET"};
+        dtask = plus.downloader.createDownload(url,{
+            filename:"_doc/download/a.jpg"
+        },function(download,status){
+            plus.io.resolveLocalFileSystemURL(download.filename,function(entry){
+                mui.alert('completed');
+                $("#downloadlist").append("<p>"+download.filename+"</p>");
+                $("#downloadlist").append("<p>"+entry.fullPath+"</p>");
+                $("#downloadImg").attr('src',entry.fullPath);
+            });
+        });        
+        dtask.start();*/
+}
+
+</script>
+	</body>
+
+</html>
