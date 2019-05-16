@@ -24,14 +24,26 @@
 <script src="js/mui.min.js"></script>
 <script type="text/javascript">
 	var path;
+// 监听下载任务状态 
+function onStateChanged(download, status) {
+	console.log(download)
+	console.log(download.downloadedSize)
+	if(download.state == 4 && status == 200){
+		// 下载完成 
+		alert("Download success: " + download.getFileName()); 
+		$("#btnDownload").html(100*download.downloadedSize/download.totalSize+"%")
+	}  
+}
 mui.plusReady(function(){
   
     $("#btnDownload").bind('tap',function(){
        // 扩展API加载完毕后调用onPlusReady回调函数 
 			// 创建下载任务
 				var dtask = plus.downloader.createDownload( "http://editerupload.eepw.com.cn/201809/61001537857032.jpg", {method:"GET"}, function ( d, status ) {
+					
+
 					// 下载完成
-					if ( status == 200 ) { 
+					/* if ( status == 200 ) { 
 						alert( "Download success: " + d.filename );
 						plus.io.resolveLocalFileSystemURL(d.filename,function(entry){
 							console.log(entry.fullPath)
@@ -41,8 +53,9 @@ mui.plusReady(function(){
 				           });					
 					} else {
 						 alert( "Download failed: " + status ); 
-					}  
+					}  */
 				});
+				dtask.addEventListener("statechanged", onStateChanged, false);
 				//dtask.addEventListener( "statechanged", onStateChanged, false );
 				dtask.start(); 
     });

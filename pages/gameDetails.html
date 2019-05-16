@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />		
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+		<style type="text/css">
+			.fontcolor{
+				color: #1296DB;
+			}
+		</style>
+	</head>
+	<body>
+		<!--顶部logo和搜索框-->
+		<div id="gamedetailheader" v-if="headerState">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">{{gameName}}</h1>
+				<img src="../imgs/edit.png" >
+			</header>
+		</div>
+		
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					
+					<div class="contentBox">
+						<!-- 头部信息 -->
+						<div class="gd-con-header">
+							<div class="gd-c-h-top">
+								<div class="gd-c-h-top-left">
+									<img src="../imgs/u26.png" >
+								</div>
+								<div class="gd-c-h-top-right">
+									<div class="gd-c-h-top-right-top">
+										<span id="gameName">
+											斗地主
+										</span>
+										<span>V1.6.0.0</span>
+									</div>
+									<div class="gd-c-h-top-right-bottom">
+										<span>1.5万下载 </span>|<span>49.9M</span>|<span>中文</span>|<span>日期：2019-05-05</span>
+									</div>
+								</div>
+							</div>
+							<span class="gd-c-h-bottom" style="color: red;">
+								上线送VIP3,3888钻,200万铜钱,充值比例1：200
+							</span>
+						</div>
+						<!-- 头部信息 end-->
+						<ul class="rankUlBox" id="rankul" v-cloak>
+							<li :data-href = "item.href" :style="idx==1?'border-right:none':''" class="rank-ulbox-li" :class="idx==index?'fontcolor':''" :id="idx" v-for="(item,idx) in rankMsg">
+								{{item.text}}
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<!-- 底部按钮 -->
+			<div class="footer">
+				<button type="button" class="mui-btn mui-btn-primary" style="width: 80%;height: 80%;">安装</button>
+			</div>
+		<!-- 底部按钮 end-->
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var rankulApp=new Vue({
+				el:"#rankul",
+				data() {
+					return {
+						rankMsg:[
+									{href:"pages/gamedetailsAbs.html",text:"详情"},
+									{href:"pages/gamedetailsText.html",text:"评论"},
+								],
+						fontcolor: true,
+						index:0
+					}
+				}
+			})
+			
+			
+			mui.init({});
+			mui.plusReady(function(){
+				 //判断是否支持沉浸式
+				var isImmersedStatusbar = plus.navigator.isImmersedStatusbar();
+				if(isImmersedStatusbar){
+					//获取系统状态栏高度
+					var StatusbarHeigth  = plus.navigator.getStatusbarHeight();
+				//	console.log(StatusbarHeigth)
+					var header = document.getElementById('gamedetailheader');
+					header.style.paddingTop = StatusbarHeigth+'px';
+				}
+				
+				//加载子页面
+					var gamedetailsubpages=["pages/gamedetailsAbs.html","pages/gamedetailsText.html"]
+					var gamedetailsubpagesStyle={
+						top:"207px",
+						bottom:"0",
+						width:"100%",//子页面宽度，默认为100%
+						height:"100%",//子页面高度，默认为100%
+					}
+				var self=plus.webview.currentWebview();
+				gamedetailsubpages.forEach(item=>{
+						let sub=plus.webview.create(item,item,subpageStyle)
+						sub.hide();
+						self.append(sub)	
+				})		
+				plus.webview.show(subpages[0])
+				
+				
+				//加载子页面
+				
+				
+			})
+			
+			
+			
+			//导航点击
+			mui(".rankUlBox").on("tap","li",function(e){		
+				let tagPageid=this.getAttribute("id");	
+				let tagPage=this.getAttribute("data-href");	
+				rankulApp.index=tagPageid
+				/*
+				//获取子页面
+				var subpage=plus.webview.getWebviewById(tagPage);
+				plus.webview.show(tagPage,"fade-in",100);
+				//给子页面传值
+				subpage.evalJS('cate='+tagPageid+';firstgetlist();') */
+			})
+		</script>
+		
+		
+	</body>
+</html>

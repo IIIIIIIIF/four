@@ -25,10 +25,10 @@
 							
 							<template v-for="(gameitem,index) in item.gamelist">
 							
-								<div class="scrollItem mui-control-item downbox" style="display: flex;padding-left: 0;height: 77%;">
+								<div class="scrollItem mui-control-item gamedownbox" style="display: flex;padding-left: 0;height: 77%;">
 									<img class="gamescrollImg" :src="gameitem.img" >
 									<span>{{gameitem.name}}</span>
-									<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" >下载</button>
+									<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" >{{ondownstatus}}</button>
 								</div>
 							
 							</template>
@@ -67,28 +67,29 @@
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			// 监听下载任务状态 
+			function onStateChanged(download, status) {
+				console.log(download)
+				console.log(download.downloadedSize)
+				if(download.state == 4 && status == 200){
+					// 下载完成 
+					alert("Download success: " + download.getFileName()); 
+					this.innerHTML=100*download.downloadedSize/download.totalSize+"%"
+				}  
+			}
+			
 			mui.init({});
 			// 扩展API加载完毕，现在可以正常调用扩展API 
 			mui.plusReady(function(){
 				// 创建下载任务
-				
-				mui('.downbox').on("tap","button",function (e) {
+				mui('.gamedownbox').on("tap","button",function (e) {
 				  	// 创建下载任务
-				  	var dtask = plus.downloader.createDownload( "https://big.vqs.com/zqw/20190514/579F5E22017595E2736CEEE492FB6CFD.apk", {method:"GET"}, function ( d, status ) {
-				  		console.log("正在下载")
-						// 下载完成
-				  		if ( status == 200 ) { 
-				  			alert( "Download success: " + d.filename );
-				  			plus.io.resolveLocalFileSystemURL(d.filename,function(entry){
-				  				console.log(entry) 
-				  	           });					
-				  		} else {
-				  			 alert( "Download failed: " + status ); 
-				  		}  
-				  	});
-				  	//dtask.addEventListener( "statechanged", onStateChanged, false );
-				  	dtask.start(); 
+				  	var dtask = plus.downloader.createDownload( "http://editerupload.eepw.com.cn/201809/61001537857032.jpg", {method:"GET"}, function ( d, status ) {});
+				  	dtask.addEventListener("statechanged", onStateChanged.apply(this), false);
+				  	dtask.start(); 				
 				});
+				
+				
 				
 			})
 			
@@ -97,6 +98,7 @@
 				el:"#mainApp",
 				data(){
 					return {
+						ondownstatus:"下载",
 						gameMsg:[
 							{
 								title:"游戏精品",
