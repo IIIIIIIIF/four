@@ -85,12 +85,9 @@
 				mui('.gamedownbox').on("tap","button",function (e) {
 				  	// 创建下载任务
 				  	var dtask = plus.downloader.createDownload( "http://editerupload.eepw.com.cn/201809/61001537857032.jpg", {method:"GET"}, function ( d, status ) {});
-				  	dtask.addEventListener("statechanged", onStateChanged.apply(this), false);
+				  	dtask.addEventListener("statechanged", onStateChanged, false);
 				  	dtask.start(); 				
 				});
-				
-				
-				
 			})
 			
 			
@@ -160,6 +157,19 @@
 				indicators: false, //是否显示滚动条
 				deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
 			});
+			
+			//底部导航点击
+			mui(".mui-bar-tab").on("tap","a",function(e){		
+				let tagPage=this.getAttribute("href");
+				if(tagPage=="pages/mine.html"){
+					headerApp.headerState=false			
+				}else{
+					headerApp.headerState=true;
+					plus.webview.hide(subpages[4]);
+				}
+				plus.webview.show(tagPage,"fade-in",100)
+			})
+			
 		</script>
 	</body>
 

@@ -6,13 +6,45 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />		
 		<link href="../css/mui.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../css/main.css"/>
-		
+		<style type="text/css">
+			/* 横向区域滚动 */
+			.slide-box{
+			    display: -webkit-box;
+			    overflow-x: scroll;
+				overflow-y: hidden;			
+			    -webkit-overflow-scrolling:touch;
+			}
+			.slide-item{
+			    width: 200px;
+			    height: 300px;  
+			    margin-right: 0.2rem;
+			}
+					/* 横向区域滚动 */
+		</style>
 		
 	</head>
 	<body>
 		
 		<div class="mui-content">
 			
+			<div class="absBox" id="abspage">
+				<span id="abstitle">
+					介绍
+				</span>
+				<!-- 图片区域开始 -->
+				<div class="slide-box" id="scrollApp">
+					<template v-for="item in scrollimgArr">
+						<div class="slide-item">
+							<img :src="item" width="100%" height="100%">
+						</div>
+					</template> 
+				</div>
+				<!-- 图片区域结束 -->
+				
+				<span id="absContent">
+					{{abscontent}}
+				</span>
+			</div>
 			
 			
 			
@@ -22,5 +54,26 @@
 		
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			/*图片区域滚动初始化开始  */
+			var abspage=new Vue({
+				el:"#abspage",
+				data:{
+					scrollimgArr:[],
+					abscontent:"斗地主是流行于湖北武汉、汉阳一带的扑克游戏。游戏需由3个玩家进行，其中一方为地主，其余两家为另一方，双方对战，先出完牌的一方获胜。【游戏特色】1、经典欢乐场、刺激癞子场，还有新鲜好玩的特色玩法，给你提供多元化的休闲娱乐。2、玩够8局即可免费开宝箱，抽取高达几十万游戏"
+				}
+			});		
+			//样例图片数组开始-->可以删除
+			var scrollimgArr=["../imgs/u742.png","../imgs/u742.png","../imgs/u742.png","../imgs/u742.png","../imgs/u742.png"]
+			abspage.scrollimgArr=scrollimgArr;
+			//样例图片数组-->可以删除
+			//正式数据进行Ajax-->成功之后
+			/* success:function(res){
+				scrollApp.scrollimgArr=res.scrollimgArr
+			} */
+			
+			/*图片区域滚动初始化结束  */
+		</script>
 	</body>
 </html>
