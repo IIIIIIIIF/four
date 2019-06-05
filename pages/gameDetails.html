@@ -69,6 +69,7 @@
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			var gameId;
 			var rankulApp=new Vue({
 				el:"#rankul",
 				data() {
@@ -86,6 +87,10 @@
 			
 			mui.init({});
 			mui.plusReady(function(){
+				var self=plus.webview.currentWebview();
+				//获取参数	
+				gameId = self.gameId
+				
 				 //判断是否支持沉浸式
 				var isImmersedStatusbar = plus.navigator.isImmersedStatusbar();
 				if(isImmersedStatusbar){
@@ -104,15 +109,13 @@
 						width:"100%",//子页面宽度，默认为100%
 						height:"100%",//子页面高度，默认为100%
 					}
-				var self=plus.webview.currentWebview();
+		
 				gamedetailsubpages.forEach(item=>{
 						let sub=plus.webview.create(item,item,subpageStyle)
 						sub.hide();
 						self.append(sub)	
 				})		
-				plus.webview.show(subpages[0])
-				
-				
+				plus.webview.show(gamedetailsubpages[0])	
 				//加载子页面
 				
 				
@@ -124,13 +127,13 @@
 			mui(".rankUlBox").on("tap","li",function(e){		
 				let tagPageid=this.getAttribute("id");	
 				let tagPage=this.getAttribute("data-href");	
-				rankulApp.index=tagPageid
-				/*
+				rankulApp.index=tagPageid	
+				
 				//获取子页面
 				var subpage=plus.webview.getWebviewById(tagPage);
 				plus.webview.show(tagPage,"fade-in",100);
 				//给子页面传值
-				subpage.evalJS('cate='+tagPageid+';firstgetlist();') */
+			/*	subpage.evalJS('cate='+tagPageid+';firstgetlist();') */
 			})
 		</script>
 		

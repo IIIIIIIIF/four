@@ -26,7 +26,7 @@
 							<template v-for="(gameitem,index) in item.gamelist">
 							
 								<div class="scrollItem mui-control-item gamedownbox" style="display: flex;padding-left: 0;height: 77%;">
-									<img class="gamescrollImg" :src="gameitem.img" >
+									<img class="gamescrollImg" :src="gameitem.img" @click="gameDetail(123)">
 									<span>{{gameitem.name}}</span>
 									<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" >{{ondownstatus}}</button>
 								</div>
@@ -151,6 +151,15 @@
 						],
 						
 					}
+				},
+				methods:{
+					gameDetail(e){
+						mui.openWindow({
+							url : "gameDetails.html",
+							id : 'gameDetails',
+							extras : {gameId : e}
+						});
+					},
 				}
 			})
 			mui('.mui-scroll-wrapper').scroll({
