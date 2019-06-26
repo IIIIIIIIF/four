@@ -8,26 +8,108 @@
 		<title>评论</title>
 	</head>
 	<body>
-		<div class="mui-content">
+		<div class="mui-content" id="gameText" style="background: #FFFFFF;">
 			<div class="commentTop">
-				<img src="../imgs/u883.png" >
-				<div class="commentTopBox">
-					<img src="../imgs/u877.png" class="ct-box">
-					<span id="commentText">
-						我要评论
-					</span>
+				<div class="commentTopBtn" v-if="commentBtn">
+					<img src="../imgs/u883.png" >
+					<div class="commentTopBox">
+						<span id="commentText" @click="onComment">
+							我要评论
+						</span>
+					</div>
 				</div>
 				
-				
-			</div>
+				<div class="mui-input-group commentArea" v-else>
+					<div class="mui-input-row" style="width: 100%;height: 100%;margin-right: 0.416666rem;">
+						<input type="text" maxlength="200" style="width: 100%;height: 100%;border: 1px solid #C0C0C0;" class="mui-input-clear" placeholder="发言友善的人,更容易被喜欢哦" v-model="commentText">
+					</div>
+					<button type="button" class="mui-btn mui-btn-blue" @click="onCommentSub">发布</button>
+					<span id="commentAreaSpan">{{commentTextLength}}/200</span>
+				</div>
 			
-			<div class="commentList">
-				
 			</div>
-			
+			<div class="nocomment" style="font-weight: 700;padding: 1.666666rem;">
+				<span>最新评论</span>
+			</div>
+			<div class="commentList" v-if="commentStatus">
+				<div class="mui-scroll-wrapper" style="background: #FFFFFF;top: 12.5rem;">
+					<div class="mui-scroll">
+						
+						<ul class="commentulBox">	
+								
+							<template v-for="(item,index) in gamecommentLabel">
+								<li class="commentulLi">
+									<img :src="item.userImg" class="commentulliLeft">
+									<div class="commentulliRight">
+										<span>{{item.userName}}</span>
+										<span>{{item.date}}</span>
+										<span>{{item.text}}</span>
+									</div>
+								</li>
+							</template> 
+													
+						</ul>
+						
+					</div>
+				</div>
+			</div>
+			<div class="nocomment" v-else style="margin: 0 auto;width: 13.5rem;text-align: center;">
+				<span>暂无评论</span>
+			</div>
 			
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			mui.init({});	
+			var testData=[]
+			var gameTextApp=new Vue({
+				el:"#gameText",
+				data() {
+					return {
+						commentStatus: false,
+						commentBtn:true,
+						gamecommentLabel:testData,
+						commentText:''
+					}
+				},
+				methods:{
+					onComment:function(){
+						this.commentBtn=false
+					},
+					onCommentSub:function(){					
+						if(!this.commentText|| this.commentText.trim() == ""){
+							 mui.toast('消息不能为空哦',{ duration:'long', type:'div' }) 
+						}else{
+							this.commentBtn=true;
+							this.commentStatus=true;
+							testData.unshift(
+							{
+								userImg:"../imgs/u698.png",
+								userName:"dsadawqe",
+								date:"20190626",
+								text:this.commentText
+							}) 
+							this.commentText=''	
+							mui.toast('评论成功！',{ duration:'long', type:'div' }) 
+						}								
+					}
+				},
+				computed: {
+					commentTextLength:function() {
+						if(this.commentText.length>200){
+							this.commentText.length=200
+						}
+						return this.commentText.length
+					}
+				},
+			})
+			mui('.mui-scroll-wrapper').scroll({
+				indicators: false, //是否显示滚动条
+				deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			});
+		</script>
+		
 	</body>
 </html>

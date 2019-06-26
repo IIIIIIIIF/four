@@ -26,37 +26,47 @@
 	<body>
 		
 		<div class="mui-content">
-			
-			<div class="absBox" id="abspage">
-				<span id="abstitle">
-					介绍
-				</span>
-				<!-- 图片区域开始 -->
-				<div class="slide-box" id="scrollApp">
-					<template v-for="item in scrollimgArr">
-						<div class="slide-item">
-							<img :src="item" width="100%" height="100%">
+			<div class="mui-scroll-wrapper" style="background: #FFFFFF;">
+				<div class="mui-scroll">
+					<div class="absBox" id="abspage">
+						<ul class="gameAbsullabel"  style="color: #AAAAAA;">
+							<template v-for="(item,index) in gameLabel">
+							<li>{{item}}</li>
+							</template> 
+						</ul>
+						<!-- 图片区域开始 -->
+						<div class="slide-box" id="scrollApp">
+							<template v-for="(item,index) in scrollimgArr">
+								<div class="slide-item">
+									<img :src="item" width="100%" height="100%">
+								</div>
+							</template> 
 						</div>
-					</template> 
-				</div>
-				<!-- 图片区域结束 -->
+						<!-- 图片区域结束 -->
+						<p style="font-weight: 700;color: black;margin-top: 1.666666rem;">
+							游戏介绍
+						</p>
+						<span id="absContent" style="color: #AAAAAA;padding-right: 0.833333rem;">
+							{{abscontent}}
+						</span>
+					</div>
 				
-				<span id="absContent">
-					{{abscontent}}
-				</span>
-			</div>	
+				</div>
+			</div>
 		</div>
-		
-		
-		
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			
+			mui.init({});
+			mui('.mui-scroll-wrapper').scroll({
+				indicators: false, //是否显示滚动条
+				deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			});
 			/*图片区域滚动初始化开始  */
 			var abspage=new Vue({
 				el:"#abspage",
 				data:{
+					gameLabel:['网络游戏','休闲益智'],
 					scrollimgArr:[],
 					abscontent:"斗地主是流行于湖北武汉、汉阳一带的扑克游戏。游戏需由3个玩家进行，其中一方为地主，其余两家为另一方，双方对战，先出完牌的一方获胜。【游戏特色】1、经典欢乐场、刺激癞子场，还有新鲜好玩的特色玩法，给你提供多元化的休闲娱乐。2、玩够8局即可免费开宝箱，抽取高达几十万游戏"
 				}
@@ -68,8 +78,7 @@
 			//正式数据进行Ajax-->成功之后
 			/* success:function(res){
 				scrollApp.scrollimgArr=res.scrollimgArr
-			} */
-			
+			} */		
 			/*图片区域滚动初始化结束  */
 		</script>
 	</body>

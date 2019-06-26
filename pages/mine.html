@@ -16,7 +16,7 @@
 			<div style="display: flex;" class="mineHeader">			
 					<img src="../imgs/test.png" class="mineImg">
 					<div class="username">
-						<input type="text" id="minename" value="admin" />
+						<input type="text" id="minename" v-model="username" />
 						<img src="../imgs/edit.png" class="editImg">
 					</div>				
 			</div>
@@ -34,6 +34,14 @@
 					</div>
 				</template>
 				
+				<div class="listItem">
+					<img src="../imgs/edit.png" >
+					<span style="margin-left: 1.666666rem;">免责声明</span>
+				</div>
+				<div class="listItem">
+					<img src="../imgs/edit.png" >
+					<span style="margin-left: 1.666666rem;">版本更新</span>
+				</div>
 			</div>	
 		</div>
 		
@@ -41,6 +49,14 @@
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			var headerApp=new Vue({
+				el:"#header",
+				data() {
+					return {
+						username: "admin"
+					}
+				},
+			})
 			var mineApp=new Vue({
 				el:"#mineApp",
 				data() {

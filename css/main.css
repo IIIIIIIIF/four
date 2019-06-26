@@ -1,18 +1,21 @@
-	html{touch-action: none;font-size: 12px;}
+	html{touch-action: none;font-size: 12px;background: #FFFFFF;}
 	[v-cloak] {
 		display: none;
 	}
 	*{margin: 0;padding: 0;list-style: none;}
-	#header{background:#1296DB; height:104px;}
-	#gamedetailheader{background:#1296DB; height:40px;}
+	#header{background:#1296DB; height:8.666666rem;}
+	#loginheader{height:4.583333rem;background:#1296DB;}
+	.loginHeader{width: 100%;height: 100%;flex-direction: row;justify-content: flex-start;align-items: center;}
+	#gamedetailheader{background:#1296DB; height:4.583333rem;}
+	.gameDetailheader{display: flex;flex-direction: row;justify-content: space-between;align-items: center;width: 100%;height: 100%;}
    	#logo{width:50px; height:44px; text-align:center; flex-shrink:0;}
-		#logo img{width:40px;}
-		#indexSearch{width:100%; height:30px; background:#FFFFFF; margin:30px 15px; border-radius:30px;}
-		#indexSearch input[type="search"]{display:block; width:96%; height:30px; line-height:30px; padding:0px 2%; background:none; -webkit-appearance:none; appearance:none; font-size:15px; text-indent:15px; text-align:left;}
-		#indexCate{height:44px;}
-		#indexCate a{color:#FFFFFF;}
-		.mui-active{border-color:#FFFFFF !important;}
-		.tabber{position: fixed;left: 0;bottom: 0;}
+	#logo img{width:40px;}
+	#indexSearch{width:100%; height:30px; background:#FFFFFF; margin:30px 15px; border-radius:30px;}
+	#indexSearch input[type="search"]{display:block; width:96%; height:30px; line-height:30px; padding:0px 2%; background:none; -webkit-appearance:none; appearance:none; font-size:15px; text-indent:15px; text-align:left;}
+	#indexCate{height:44px;}
+	#indexCate a{color:#FFFFFF;}
+	.mui-active{border-color:#FFFFFF !important;}
+	.tabber{position: fixed;left: 0;bottom: 0;}
 	/* 横向区域滚动 */
 		  .slide-box{
 	    display: -webkit-box;
@@ -285,10 +288,11 @@
 		bottom: 0;
 		left: 0;
 		height: 5rem;
-		border: 1px solid red;
+		z-index: 1000;
+		background: #F7F7F7;
 	}
 	.contentBox{
-		margin-top: 3.333333rem;
+		background: #F7F7F7;
 	}
 	.gd-con-header{
 		width: 100%;
@@ -305,6 +309,7 @@
 		flex-direction: row;
 		justify-content: space-around;
 		align-items: center;
+		padding: 0 0.5rem;
 	}
 	.gd-c-h-top-right{
 		width: 100%;
@@ -318,34 +323,121 @@
 		width: 100%;
 		height: 7.5rem;
 		border: 1px solid #CCCCCC;
+	}
+	.commentTopBtn{
+		width: 100%;
+		height: 100%;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-around;
 		align-items: center;
-		position: relative;
 	}
 	.commentTopBox{
 		width: 60%;
-		height: 40%;
-		position: relative;
+		height: 40%;		
 		border: 1px solid #CCCCCC;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.commentArea{
+		width: 100%;
+		height: 100%;
+		padding: 0.833333rem;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: center;	
+		position: relative;
+	}
+	#commentAreaSpan{
+		position: absolute;
+		bottom: 1.016666rem;
+		right: 6.166666rem;
+		color: #ccc;
 	}
 	.ct-box{
 		position: absolute;
 		top: 0;
 		left: -0.833333rem;
 	}
-	#commentText{
-		position: absolute;
-		top: 0;
-		left: 50%;
-		
-	}	
-	
-	
-	
-	
-	
-	
+	.absBox{
+		padding-left: 1.2rem;
+	}
+	.gameAbsullabel{
+		width: 100%;
+		height: 4.166666rem;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+	}
+	.gameAbsullabel li {
+		width: 7.333333rem;
+		height: 2.083333rem;
+		border: 0.083333rem solid #CCCCCC;
+		border-radius: 0.833333rem;
+		margin-left: 0.833333rem;
+		text-align: center;
+		font-size: 1rem;
+	}
+	/* 游戏详情评论 */
+	.commentulBox{
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;	
+	}
+	.commentulLi{
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content:flex-start;
+		align-items: flex-start;
+		padding: 1.333333rem;
+		border-bottom: 0.083333rem solid #BBB;
+	}
+	.commentulliLeft{
+		width: 3.166666rem;
+		height: 3.166666rem;
+		border-radius: 50%;
+	}
+	.commentulliRight{
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: flex-start;
+		padding-left: 1.25rem;
+	}
 		/* 详情 end*/	
+	/* 登录 */
+	.loginBox{
+		background: #FFFFFF;
+		margin-top: 1.666666rem;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.loginBoxMsg-phone{
+		width: 100%;
+		border-bottom: 1px solid #CCCCCC;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+	}
+	.loginBoxMsg-mark{
+		width: 100%;
+		border-bottom: 1px solid #CCCCCC;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+	}
+	
 	

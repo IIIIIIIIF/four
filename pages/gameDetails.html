@@ -15,17 +15,14 @@
 	<body>
 		<!--顶部logo和搜索框-->
 		<div id="gamedetailheader" v-if="headerState">
-			<header class="mui-bar mui-bar-nav">
+			<div class="gameDetailheader" id="detailheader">
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-				<h1 class="mui-title">{{gameName}}</h1>
+				<h1 class="mui-title" style="color: #F7F7F7;">{{gameName}}</h1>
 				<img src="../imgs/edit.png" >
-			</header>
+			</div>
 		</div>
 		
 		<div class="mui-content">
-			<div class="mui-scroll-wrapper">
-				<div class="mui-scroll">
-					
 					<div class="contentBox">
 						<!-- 头部信息 -->
 						<div class="gd-con-header">
@@ -51,14 +48,11 @@
 						</div>
 						<!-- 头部信息 end-->
 						<ul class="rankUlBox" id="rankul" v-cloak>
-							<li :data-href = "item.href" :style="idx==1?'border-right:none':''" class="rank-ulbox-li" :class="idx==index?'fontcolor':''" :id="idx" v-for="(item,idx) in rankMsg">
+							<li :data-href = "item.href" :style="idx==1?'border-right:none':''" class="rank-ulbox-li" :class="idx==index?'fontcolor':''"  :id="idx" v-for="(item,idx) in rankMsg" :key="idx">
 								{{item.text}}
 							</li>
 						</ul>
 					</div>
-					
-				</div>
-			</div>
 		</div>
 		
 		<!-- 底部按钮 -->
@@ -70,13 +64,22 @@
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			var gameId;
+			var gamedetailheaderApp=new Vue({
+				el:"#detailheader",
+				data() {
+					return {
+						gameName: "斗地主"
+					}
+				},
+			})
+			
 			var rankulApp=new Vue({
 				el:"#rankul",
 				data() {
 					return {
 						rankMsg:[
-									{href:"pages/gamedetailsAbs.html",text:"详情"},
-									{href:"pages/gamedetailsText.html",text:"评论"},
+									{href:"gamedetailsAbs.html",text:"详情"},
+									{href:"gamedetailsText.html",text:"评论"},
 								],
 						fontcolor: true,
 						index:0
@@ -96,22 +99,20 @@
 				if(isImmersedStatusbar){
 					//获取系统状态栏高度
 					var StatusbarHeigth  = plus.navigator.getStatusbarHeight();
-				//	console.log(StatusbarHeigth)
+					console.log(StatusbarHeigth)
 					var header = document.getElementById('gamedetailheader');
 					header.style.paddingTop = StatusbarHeigth+'px';
 				}
 				
 				//加载子页面
-					var gamedetailsubpages=["pages/gamedetailsAbs.html","pages/gamedetailsText.html"]
+					var gamedetailsubpages=["gamedetailsAbs.html","gamedetailsText.html"]
 					var gamedetailsubpagesStyle={
 						top:"207px",
-						bottom:"0",
-						width:"100%",//子页面宽度，默认为100%
-						height:"100%",//子页面高度，默认为100%
+						bottom:"60px",
 					}
 		
 				gamedetailsubpages.forEach(item=>{
-						let sub=plus.webview.create(item,item,subpageStyle)
+						let sub=plus.webview.create(item,item,gamedetailsubpagesStyle)
 						sub.hide();
 						self.append(sub)	
 				})		

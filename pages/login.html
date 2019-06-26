@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css"/>	
+	</head>
+
+	<body>
+		
+		<!--顶部logo和搜索框-->
+		<div id="loginheader">
+			<div style="display: flex;" class="loginHeader">			
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
+					<span style="color: #F7F7F7;padding-left: 1.25rem;font-size: 1.5rem;">登录</span>				
+			</div>
+		</div>
+		<!--顶部logo和搜索框 end-->
+		
+		<div class="mui-content">
+			<div class="loginBox">
+				<p style="font-size: 1rem;">若您的手机号未注册，系统将自动为您生成四维助手账号</p>
+				<div class="loginBoxMsg">
+					<div class="loginBoxMsg-phone">
+						<span>+86</span>
+						<input class="loginInput" style="border: none;" type="text" v-model="userPhone" placeholder="请输入手机号"/>
+					</div>
+					<div class="loginBoxMsg-mark">
+						<input class="loginInput" style="border: none;" type="text" v-model="userMark" placeholder="请输入验证码"/>
+						<span style="color: #1296DB;">获取验证码</span>
+					</div>
+				</div>
+				<p style="font-size: 1rem;">选择登录代表您已经阅读并同意<span style="color: #1296DB;">四维助手用户协议</span></p>
+				<button type="button" class="mui-btn mui-btn-primary" style="width: 80%;height: 80%;">登录</button>
+				
+			</div>
+		</div>
+		
+		
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>
